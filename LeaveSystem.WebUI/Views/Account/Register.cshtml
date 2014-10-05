@@ -1,0 +1,127 @@
+﻿@model LeaveSystem.Domain.Entities.User
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<!-- import DatePicker based on Bootstrap -->
+<!-- <script src="~/Scripts/bootstrap-datepicker.js"></script> -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#DateOfBirth').attr("class", "form-control date-picker");
+        //$('#DateOfBirth').attr("type", "text");
+        /*
+        $('.date-picker').datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+        */
+        $(".date-picker").datepicker();
+    });
+</script>
+
+<h2>Register</h2>
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    <h3>User Information</h3>
+    
+    <div class="form-group">
+        @Html.LabelFor(u => u.Username, new { @class="col-md-3 control-label"})
+        <div class="col-md-5">
+            @Html.TextBoxFor(u => u.Username, new { @class = "form-control", placeholder = "Username" }) 
+        </div>
+        @Html.ValidationMessageFor(u => u.Username)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(u => u.Password, new { @class = "col-md-3 control-label" })
+        <div class="col-md-5">
+            @Html.PasswordFor(u => u.Password, new { @class = "form-control", placeholder = "Password" })
+        </div>
+        @Html.ValidationMessageFor(u => u.Password)
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(u => u.PasswordCompare, new { @class = "col-md-3 control-label" })
+        <div class="col-md-5">
+            @Html.PasswordFor(u => u.PasswordCompare, new { @class = "form-control", placeholder = "Re-Password" })
+        </div>
+        @Html.ValidationMessageFor(u => u.PasswordCompare)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(u => u.DateOfBirth, new { @class = "col-md-3 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(u => u.DateOfBirth, new { @class = "form-control date-picker", @Value = "", placeholder = "Date Of Birth" })
+        </div>
+        @Html.ValidationMessageFor(u => u.DateOfBirth)
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(u => u.Gender, new { @class = "col-md-3 control-label" })
+        <div class="col-md-5">
+            @Html.DropDownListFor(u => u.Gender, new SelectList(Enum.GetNames(typeof(LeaveSystem.Domain.Entities.Gender))), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(u => u.Email, new { @class = "col-md-3 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(u => u.Email, new { @class = "form-control" })
+        </div>
+        @Html.ValidationMessageFor(u => u.Email)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(u => u.MobileNumber, new { @class = "col-md-3 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(u => u.MobileNumber, new { @class = "form-control" })
+        </div>
+    </div>
+    /*
+     * @Html.TextBoxFor(u => u.DateOfBirth, new { @class = "form-control", type = "date" })
+     *
+    foreach (var property in ViewData.ModelMetadata.Properties)
+    {
+        if (property.PropertyName == "UserID")
+        {
+            continue;
+        }
+
+        if (property.PropertyName == "Password")
+        {
+            <div class="form-group">
+                @Html.LabelFor(u=>u.Password)
+                @Html.PasswordFor(u => u.Password, new { @class = "form-control" })
+            </div>
+
+            continue;
+        }
+
+        if (property.PropertyName == "Gender")
+        {
+            <div class="form-group">
+                @Html.LabelFor(u=>u.Gender)
+                @Html.DropDownListFor(u => u.Gender, new SelectList(Enum.GetNames(typeof(LeaveSystem.Domain.Entities.Gender))))
+            </div>
+
+            continue;
+        }
+
+        //if (property.PropertyName != "Gender" && property.PropertyName != "UserID")
+        //{
+            <div class="form-group">
+                 <label>@(property.DisplayName ?? property.PropertyName)</label>
+                 @Html.TextBox(property.PropertyName, null, new {@class = "form-control"})
+            </div>
+        //}
+    }
+    */
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Register" />
+    </div>  
+}
+

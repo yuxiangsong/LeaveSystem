@@ -1,0 +1,50 @@
+﻿@model LeaveSystem.Domain.Entities.User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+
+<div class="container">
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-signin" }))
+    {
+        @Html.ValidationSummary(true);
+        <h2 class="form-signin-heading">Please sign in</h2>
+
+        <div class="form-group">
+            <div class="editor-label">
+                @Html.LabelFor(u => u.Username)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u => u.Username, new { @class = "form-control" })
+                @Html.ValidationMessageFor(u => u.Username)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="editor-label">
+                @Html.LabelFor(u => u.Password)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(u => u.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(u => u.Password)
+            </div>
+        </div>
+
+        <div class="text-center">
+            <input class="btn btn-primary" type="submit" value="Login" />
+            @Html.ActionLink("Register", "Register", new { controller = "Account" }, new { @class = "btn btn-primary" })
+        </div>
+        
+        <!-- return url -->
+        @Html.Hidden("returnUrl", Request.QueryString["returnUrl"] ?? Request.Url.PathAndQuery)
+    }
+</div>
+
+
+
+            
+
+
+    
