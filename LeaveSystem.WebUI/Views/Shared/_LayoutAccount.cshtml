@@ -6,6 +6,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     
+    <!--
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
     <link href="~/Content/site-account.css" rel="stylesheet" />
@@ -18,7 +19,18 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
     
     <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-     
+     -->
+
+    <link href="~/Content/site-account.css" rel="stylesheet" />
+    @Styles.Render("~/content/css/bootstrap")
+
+    @RenderSection("CSS",false)
+
+    @Scripts.Render("~/bundles/js/jquery")
+    @Scripts.Render("~/bundles/js/bootstrap")
+
+    @RenderSection("Scripts",false)
+
     <title></title>
 </head>
 <body>
@@ -56,7 +68,7 @@
         {
             <div class="alert alert-success">@TempData["userMessage"]</div>
         }
-        @RenderBody()
+        @RenderSection("Body")
     </div>
 
 </body>
