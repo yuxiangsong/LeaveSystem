@@ -8,30 +8,39 @@
 <!-- import DatePicker based on Bootstrap -->
 <!-- <script src="~/Scripts/bootstrap-datepicker.js"></script> -->
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        //$('#DateOfBirth').attr("class", "form-control date-picker");
-        //$('#DateOfBirth').attr("type", "text");
-        /*
-        $('.date-picker').datepicker({
-            changeMonth: true,
-            changeYear: true
-        });
-        */
-        $(".date-picker").datepicker();
-    });
-</script>
+@section CSS {
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+}
 
+@section Scripts{
+    <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$('#DateOfBirth').attr("class", "form-control date-picker");
+            //$('#DateOfBirth').attr("type", "text");
+            /*
+            $('.date-picker').datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+            */
+            $(".date-picker").datepicker();
+        });
+    </script>
+}
+
+@section Body{
 <h2>Register</h2>
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.ValidationSummary(true)
     <h3>User Information</h3>
-    
+
     <div class="form-group">
-        @Html.LabelFor(u => u.Username, new { @class="col-md-3 control-label"})
+        @Html.LabelFor(u => u.Username, new { @class = "col-md-3 control-label" })
         <div class="col-md-5">
-            @Html.TextBoxFor(u => u.Username, new { @class = "form-control", placeholder = "Username" }) 
+            @Html.TextBoxFor(u => u.Username, new { @class = "form-control", placeholder = "Username" })
         </div>
         @Html.ValidationMessageFor(u => u.Username)
     </div>
@@ -43,7 +52,7 @@
         </div>
         @Html.ValidationMessageFor(u => u.Password)
     </div>
-    
+
     <div class="form-group">
         @Html.LabelFor(u => u.PasswordCompare, new { @class = "col-md-3 control-label" })
         <div class="col-md-5">
@@ -59,7 +68,7 @@
         </div>
         @Html.ValidationMessageFor(u => u.DateOfBirth)
     </div>
-    
+
     <div class="form-group">
         @Html.LabelFor(u => u.Gender, new { @class = "col-md-3 control-label" })
         <div class="col-md-5">
@@ -81,6 +90,53 @@
             @Html.TextBoxFor(u => u.MobileNumber, new { @class = "form-control" })
         </div>
     </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(u => u.Address.Line1, new { @class = "col-md-3 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(u => u.Address.Line1, new { @class = "form-control" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(u => u.Address.Line2, new { @class = "col-md-3 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(u => u.Address.Line2, new { @class = "form-control" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(u => u.Address.City, new { @class = "col-md-3 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(u => u.Address.City, new { @class = "form-control" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(u => u.Address.PostCode, new { @class = "col-md-3 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(u => u.Address.PostCode, new { @class = "form-control" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(u => u.Address.StateName, new { @class = "col-md-3 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(u => u.Address.StateName, new { @class = "form-control" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-5 col-md-offset-3">@Html.ValidationMessageFor(u => u.TermsAccepted)</div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 col-md-offset-3">
+                @Html.CheckBoxFor(u => u.TermsAccepted) <a href="#" data-toggle="modal" data-target="#myModal">I accept Terms and Conditions</a>
+            </div>
+        </div>
+    </div>
+
     /*
      * @Html.TextBoxFor(u => u.DateOfBirth, new { @class = "form-control", type = "date" })
      *
@@ -122,6 +178,26 @@
     */
     <div class="text-center">
         <input class="btn btn-primary" type="submit" value="Register" />
-    </div>  
+    </div>
 }
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Terms and Conditions</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 

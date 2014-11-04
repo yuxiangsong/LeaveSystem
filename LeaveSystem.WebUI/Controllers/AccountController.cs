@@ -25,14 +25,19 @@ namespace LeaveSystem.WebUI.Controllers
             return View();
         }
 
+        //[ActionName("register-page")]
         public ActionResult Register()
         {
+            //if(User.Identity.IsAuthenticated)
             return View();
         }
 
         [HttpPost]
         public ActionResult Register(User user)
         {
+            //string testvalue = user.HomeAddress.City;
+            //User test = user;
+
             if (ModelState.IsValid)
             {
                 userRepository.SaveUser(user);
@@ -47,6 +52,7 @@ namespace LeaveSystem.WebUI.Controllers
         }
 
         [HttpGet]
+        //[ActionName("logging")]
         public ActionResult Login()
         {
             return View();

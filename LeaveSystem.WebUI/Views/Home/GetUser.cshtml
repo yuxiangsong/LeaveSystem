@@ -1,0 +1,90 @@
+﻿@using LeaveSystem.Domain.Entities
+@model string
+
+@{
+    ViewBag.Title = "GetUser";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "tableBody",
+        Url = Url.Action("ToGetUserData"),
+        LoadingElementId = "loading",
+        LoadingElementDuration = 1500,
+        Confirm = "Do you wish to request new data?"
+        //HttpMethod (must be either Get or Post)
+        //InsertMode (InsertBefore, InsertAfter, Replace)
+    };
+}
+
+@section Scripts{
+
+<script>
+    $(document).ready(function () {
+        
+    });
+
+    function processData(data) {
+        var target = $("#tableBody");
+        target.empty();
+        for (var i = 0; i < data.length; i++) {
+            var person = data[i];
+            target.append("<tr><td>" + person.FirstName + "</td><td>" + person.LastName + "</td><td>" + person.Role + "</td></tr>");
+        }
+    }
+
+    function OnBegin() {
+
+    }
+
+    function OnSuccess(data) {
+
+    }
+
+    function OnFailure(request, error) {
+
+    }
+
+    function OnComplete(request, status) {
+
+    }
+    
+</script>
+}
+
+@section Body{
+
+<h2>GetPeople</h2>
+
+<div id="loading" class="load" style="display:none">
+    <p>Loading Data ...</p>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>UserName</th>
+            <th>DOB</th>
+            <th>Gender</th>
+        </tr>
+    </thead>
+
+    <tbody id="tableBody">
+        @Html.Action("ToGetUserData", new { selectedGender = Model })
+    </tbody>
+</table>
+
+
+@using (Ajax.BeginForm(null, null, ajaxOpts, new { id = "helloworld" }))
+{
+    <div>
+        @Html.DropDownList("selectedGender", new SelectList(
+            new[] { "All" }.Concat(Enum.GetNames(typeof(Gender)))))
+        <button type="submit">Submit</button>
+    </div>
+}
+    <div>
+        <p>@ViewBag.IsAuthenticated</p>
+        <p>@ViewBag.Username</p>
+    </div>
+
+}

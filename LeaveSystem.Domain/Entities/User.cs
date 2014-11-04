@@ -45,6 +45,24 @@ namespace LeaveSystem.Domain.Entities
         [Display(Name = "Email App")]
         public string Email { get; set; }
 
+        public Address Address { set; get; }
+
+        //Terms and Conditions
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        //[Range(typeof(bool), "true", "true", ErrorMessage = "You must accept the terms")]
+        //adopted customised attribute
+        [AttributeMustBeTrue(ErrorMessage="You must accept the terms")]
+        public bool TermsAccepted { set; get; }
+
+        //whether it is an approved user or not, by default it is NO
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        
+        public bool IsApproved { set; get; }
+
+        /*
+         * perform validation if the user is registered
+         * 
+         * */
         public bool IsValidUser(string thisUsername, string thisPassword)
         {
             string hashedPassword = Helpers.SHA1Encode(thisPassword);
@@ -71,5 +89,17 @@ namespace LeaveSystem.Domain.Entities
     public enum Gender
     {
         Male, Female
+    }
+
+    public class Address
+    {
+        [Display(Name="Line One")]
+        public string Line1 { set; get; }
+
+        [Display(Name = "Line Two")]
+        public string Line2 { set; get; }
+        public string City { set; get; }
+        public string PostCode { set; get; }
+        public string StateName { set; get; }
     }
 }

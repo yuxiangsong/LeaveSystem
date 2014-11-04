@@ -22,6 +22,13 @@ namespace LeaveSystem.WebUI.Controllers
         }
          * */
 
+        private IUserRepository repo;
+
+        public HomeController(IUserRepository userRepository)
+        {
+            this.repo = userRepository;
+        }
+
         private Person[] personData = {
             new Person {FirstName = "Adam", LastName = "Freeman", Role = Role.Admin},
             new Person {FirstName = "Jacqui", LastName = "Griffyth", Role = Role.User},
@@ -82,6 +89,33 @@ namespace LeaveSystem.WebUI.Controllers
         public ActionResult GetPeople(string selectedRole = "All")
         {
             return View((object)selectedRole);
+        }
+
+
+        public ActionResult GetUser(string selectedGender = "All")
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.IsAuthenticated = "authorised";
+                ViewBag.Username = User.Identity.Name;
+            }
+            return View((object)selectedGender);
+        }
+
+        private IEnumerable<User> ToGetData(string selectedGender)
+        {
+            IEnumerable<User> userData = repo.Users;
+            if (selectedGender != "All")
+            {
+                Gender selected = (Gender)Enum.Parse(typeof(Gender), selectedGender);
+                userData = userData.Where(u => u.Gender == selected);
+            }
+            return userData;
+        }
+
+        public PartialViewResult ToGetUserData(string selectedGender = "All")
+        {
+            return PartialView(ToGetData(selectedGender));
         }
 	}
 }

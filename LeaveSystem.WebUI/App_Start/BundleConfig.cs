@@ -9,20 +9,44 @@ namespace LeaveSystem
     public class BundleConfig
     {
         public static void RegisterBundles(BundleCollection bundles){
-            //bundle Bootstrap CSS files
-            bundles.Add(new StyleBundle("~/Content/css")
-                .Include("~/Content/bootstrap.css",
-                         "~/Content/bootstrap-theme.css"));
-            //bundle JQuery and related JS files
-            bundles.Add(new ScriptBundle("~/bundles/jquery")
+            
+            /**
+             *  bundle JS files
+             * 
+             * */
+
+            //JQuery
+            bundles.Add(new ScriptBundle("~/bundles/js/jquery")
                 .Include("~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery.validate.js",
                         "~/Scripts/jquery.validate.unobtrusive.js",
                         "~/Scripts/jquery.unobtrusive-ajax.js"));
 
-            //bundle Bootstrap JS
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap")
+            //Bootstrap
+            bundles.Add(new ScriptBundle("~/bundles/js/bootstrap")
                 .Include("~/Scripts/bootstrap.js"));
+
+            //JQuery UI
+            /*
+            bundles.Add(new ScriptBundle("~/bundles/js/jqueryui")
+                .Include("~/Scripts/jquery-ui-{version}.js"));
+            */
+
+            /**
+             *  bundle CSS files
+             * 
+             * */
+
+            //Bootstrap
+            bundles.Add(new StyleBundle("~/content/css/bootstrap")
+                .Include("~/Content/bootstrap.css",
+                         "~/Content/bootstrap-theme.css"));
+
+            //JQuery UI
+            /*
+            bundles.Add(new StyleBundle("~/content/css/jqueryui")
+                .Include("//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"));
+            */
         }
     }
 }

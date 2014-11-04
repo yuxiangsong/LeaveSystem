@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "GetPeople";
-    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
 
     AjaxOptions ajaxOpts = new AjaxOptions
     {
@@ -12,7 +12,10 @@
         LoadingElementId = "loading",
         LoadingElementDuration = 1500,
         Confirm = "Do you wish to request new data?"
+        //HttpMethod (must be either Get or Post)
+        //InsertMode (InsertBefore, InsertAfter, Replace)
     };
+    
 }
 
 <script type="text/javascript">
@@ -53,29 +56,41 @@
         @Html.Action("GetPeopleData", new { selectedRole = Model} )
     </tbody>
 </table>
-@using (Ajax.BeginForm(ajaxOpts))
-{
-    <div>
-        @Html.DropDownList("selectedRole", new SelectList(
-            new[] { "All" }.Concat(Enum.GetNames(typeof(Role)))))
-        <button type="submit">Submit</button>
-    </div>
-}
 
-<div>
-    @foreach (string role in Enum.GetNames(typeof(Role)))
+
+    @using (Ajax.BeginForm(null, null, ajaxOpts, new { id = "helloworld"}))
     {
-        <div class="ajaxLink">
-            @Ajax.ActionLink(role, "GetPeopleData",
-                new { selectedRole = role },
-                new AjaxOptions { 
-                    Url = Url.Action("GetPeopleDataJson",new{selectedRole=role}),
-                    OnSuccess = "processData"
-                })
+        <div>
+            @Html.DropDownList("selectedRole", new SelectList(
+            new[] { "All" }.Concat(Enum.GetNames(typeof(Role)))))
+            <button type="submit">Submit</button>
         </div>
     }
-</div>
 
-<div>
-    <a data-ajax="true" data-ajax-loading="#loading" data-ajax-loading-duration="1500" data-ajax-mode="replace" data-ajax-update="#tableBody" href="/Home/GetPeopleData?selectedRole=Guest">This is a test link for "Guest"</a>
-</div>
+
+    <div>
+        @foreach (string role in Enum.GetNames(typeof(Role)))
+        {
+            <div class="ajaxLink">
+                @Ajax.ActionLink(role, "GetPeopleData",
+                new { selectedRole = role },
+                new AjaxOptions
+                {
+                    Url = Url.Action("GetPeopleDataJson", new { selectedRole = role }),
+                    OnSuccess = "processData"
+                })
+            </div>
+        }
+    </div>
+
+    <div>
+        <a data-ajax="true" data-ajax-loading="#loading" data-ajax-loading-duration="1500" data-ajax-mode="replace" data-ajax-update="#tableBody" href="/Home/GetPeopleData?selectedRole=Guest">This is a test link for "Guest"</a>
+    </div>
+
+    <input type="text" id="doit">
+
+    <script>
+        $("#doit").focusout(function () {
+            //$("#helloworld").submit();
+        })
+    </script>

@@ -26,6 +26,7 @@ namespace LeaveSystem.Domain.Concrete
                 user.Password = Helpers.SHA1Encode(user.Password);
                 user.PasswordCompare = Helpers.SHA1Encode(user.PasswordCompare);
 
+                
                 context.Users.Add(user);
             }
             else

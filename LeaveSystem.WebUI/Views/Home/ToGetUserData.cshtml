@@ -1,0 +1,14 @@
+﻿
+@using LeaveSystem.Domain.Entities
+
+@model IEnumerable<User>
+
+@foreach (User u in Model)
+{
+    <tr>
+        <td>@u.Username</td>
+        <td>@u.DateOfBirth</td>
+        <td>@u.Gender</td>
+    </tr>
+}
+
