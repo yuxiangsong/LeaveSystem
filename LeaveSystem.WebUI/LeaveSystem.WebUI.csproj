@@ -120,6 +120,7 @@
     <Content Include="Content\site-account.css" />
     <Content Include="Content\site-admin.css" />
     <Content Include="Content\site-carousel.css" />
+    <Content Include="Content\site-signin.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />

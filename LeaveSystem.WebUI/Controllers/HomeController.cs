@@ -12,15 +12,7 @@ namespace LeaveSystem.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        /*
-        private IProductRepository repository;
-
-
-        public HomeController(IProductRepository productRepository)
-        {
-            this.repository = productRepository;
-        }
-         * */
+        
 
         private IUserRepository repo;
 
@@ -91,7 +83,9 @@ namespace LeaveSystem.WebUI.Controllers
             return View((object)selectedRole);
         }
 
-
+        /*
+         * User
+         * */
         public ActionResult GetUser(string selectedGender = "All")
         {
             if (User.Identity.IsAuthenticated)
@@ -102,14 +96,15 @@ namespace LeaveSystem.WebUI.Controllers
             return View((object)selectedGender);
         }
 
-        private IEnumerable<User> ToGetData(string selectedGender)
+        private IEnumerable<User> ToGetData(string selectedUsername)
         {
             IEnumerable<User> userData = repo.Users;
-            if (selectedGender != "All")
-            {
-                Gender selected = (Gender)Enum.Parse(typeof(Gender), selectedGender);
-                userData = userData.Where(u => u.Gender == selected);
-            }
+            
+            //Gender selected = (Gender)Enum.Parse(typeof(Gender), selectedUsername);
+            //userData = userData.Where(u => u.Gender == selected);
+
+            userData = userData.Where(u => u.Username == selectedUsername);
+
             return userData;
         }
 
@@ -117,5 +112,36 @@ namespace LeaveSystem.WebUI.Controllers
         {
             return PartialView(ToGetData(selectedGender));
         }
-	}
+
+        public JsonResult GetUserDataJson(string selectedUsername)
+        {
+            var data = ToGetData(selectedUsername).Select(u => new
+            {
+                Username = u.Username,
+                MobileNumber = u.MobileNumber,
+                Gender = Enum.GetName(typeof(Gender), u.Gender)
+            });
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ValidateUsername(string selectedUsername)
+        {
+
+            //var user = repo.Users.Where(u => u.Username == selectedUsername);
+
+            var user = ToGetData(selectedUsername);
+
+            if (user.Count()==0)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            
+            
+        }//ValidateUsername
+    }
 }

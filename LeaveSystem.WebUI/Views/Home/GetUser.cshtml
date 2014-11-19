@@ -15,6 +15,8 @@
         //HttpMethod (must be either Get or Post)
         //InsertMode (InsertBefore, InsertAfter, Replace)
     };
+
+    
 }
 
 @section Scripts{
@@ -33,6 +35,28 @@
         }
     }
 
+    function processUserData(data) {
+        /*
+        var target = $("#tableUserBody");
+        target.empty();
+        for (var i = 0; i < data.length; i++) {
+            var userdata = data[i];
+            target.append("<tr><td>" + userdata.Username + "</td><td>" + userdata.MobileNumber + "</td><td>" + userdata.Gender + "</td></tr>");
+        }
+        */
+        $("#outcome").empty();
+        $("#wrapper-username").attr("class","form-group");
+
+        if (data == true) {
+            $("#outcome").html("The username has been registered!");
+            $("#wrapper-username").addClass("has-error");
+            //event.preventDefault();
+        } else {
+            $("#wrapper-username").addClass("has-success");
+        }
+    }
+
+    
     function OnBegin() {
 
     }
@@ -74,6 +98,16 @@
 </table>
 
 
+@{
+    AjaxOptions ajaxOptsUser = new AjaxOptions
+    {
+        UpdateTargetId = "outcome",
+        //Url = Url.Action("GetUserDataJson"),
+        Url = Url.Action("ValidateUsername"),
+        OnSuccess = "processUserData"
+    };
+}
+
 @using (Ajax.BeginForm(null, null, ajaxOpts, new { id = "helloworld" }))
 {
     <div>
@@ -87,4 +121,38 @@
         <p>@ViewBag.Username</p>
     </div>
 
-}
+<div class="form-group" id="wrapper-username">
+    <input type="text" placeholder="Username" class="form-control" id="user-name">
+    
+
+    @using (Ajax.BeginForm(null, null, ajaxOptsUser, new { id = "validateUser", style = "display:none" }))
+    {
+        <input type="text" id="selectedUsername" name="selectedUsername" value="abc">
+    }
+</div>
+<span id="outcome"></span>
+
+<script>
+    
+    $("#user-name").focusout(function () {
+        //var valOfUsername = $("#user-name").val();
+        $("#selectedUsername").val($(this).val());
+        $("#validateUser").submit();
+    });
+</script>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>UserName</th>
+            <th>MobileNumber</th>
+            <th>Gender</th>
+        </tr>
+    </thead>
+
+    <tbody id="tableUserBody">
+        
+    </tbody>
+</table>
+}<!-- End of Body -->

@@ -5,7 +5,13 @@
     Layout = "~/Views/Shared/_LayoutAccount.cshtml";
 }
 
+@section CSS{
+<link href="~/Content/site-signin.css" rel="stylesheet" />
+}
+
 @section Body{
+
+
 <div class="container">
     @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-signin" }))
     {
@@ -32,11 +38,12 @@
             </div>
         </div>
 
-        <div class="text-center">
-            <input class="btn btn-primary" type="submit" value="Login" />
-            @Html.ActionLink("Register", "Register", new { controller = "Account" }, new { @class = "btn btn-primary" })
-        </div>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 
+        <div class="text-center">
+            @Html.ActionLink("Create a new account", "Register", new { controller = "Account" })
+        </div>
         <!-- return url -->
         @Html.Hidden("returnUrl", Request.QueryString["returnUrl"] ?? Request.Url.PathAndQuery)
     }

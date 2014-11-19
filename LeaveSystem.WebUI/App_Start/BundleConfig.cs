@@ -9,10 +9,10 @@ namespace LeaveSystem
     public class BundleConfig
     {
         public static void RegisterBundles(BundleCollection bundles){
-            
+
             /**
              *  bundle JS files
-             * 
+             *  
              * */
 
             //JQuery

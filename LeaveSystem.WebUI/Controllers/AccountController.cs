@@ -114,6 +114,7 @@ namespace LeaveSystem.WebUI.Controllers
                 return Json(true,JsonRequestBehavior.AllowGet);
             }
             */
+            
             return Json("Username has been existing", JsonRequestBehavior.AllowGet);
         }//JsonResult
 

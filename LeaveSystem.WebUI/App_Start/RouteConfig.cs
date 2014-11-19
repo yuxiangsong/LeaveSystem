@@ -12,19 +12,10 @@ namespace LeaveSystem.WebUI
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            /*
-            routes.MapRoute(null, "abc{Name}",
-                new { controller = "Home", action = "Contact"}
-            );
-            */
+            
+            
             routes.MapRoute(null, "",
                 new { controller = "Product", action = "List", category = (string)null, page = 1});
-            /*
-            routes.MapRoute(null, "",
-                new { controller = "Product", action = "List", category = (string)null, page = 1 });
-            */
-
-
             
             routes.MapRoute(null, "Page{page}",
                  new { controller = "Product", action = "List", category = (string)null },
@@ -52,7 +43,7 @@ namespace LeaveSystem.WebUI
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-             * */
+            */
         }
     }
 }

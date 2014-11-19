@@ -1,10 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 using LeaveSystem.Domain.Concrete;
@@ -17,13 +14,11 @@ namespace LeaveSystem.Domain.Entities
         public int UserID { get; set; }
 
         [Required]
-        [Display(Name = "User Name")]
-        //[Remote("ValidateUsername", "Account")]
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Please enter a password")]
         [Display(Name = "Password")]
-        //[StringLength(10, MinimumLength = 5)]
+        [StringLength(10, MinimumLength = 5)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Please re-type to confirm password")]
@@ -42,14 +37,13 @@ namespace LeaveSystem.Domain.Entities
         public string MobileNumber { get; set; }
 
         [Required]
-        [Display(Name = "Email App")]
+        [Display(Name = "Email Address")]
         public string Email { get; set; }
 
         public Address Address { set; get; }
 
         //Terms and Conditions
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        //[Range(typeof(bool), "true", "true", ErrorMessage = "You must accept the terms")]
         //adopted customised attribute
         [AttributeMustBeTrue(ErrorMessage="You must accept the terms")]
         public bool TermsAccepted { set; get; }
@@ -98,8 +92,23 @@ namespace LeaveSystem.Domain.Entities
 
         [Display(Name = "Line Two")]
         public string Line2 { set; get; }
+
+        [Required]
         public string City { set; get; }
+        [Required]
         public string PostCode { set; get; }
+        [Required]
         public string StateName { set; get; }
+    }
+
+    public class UserLogin
+    {
+        [Required(ErrorMessage = "Please enter username")]
+        [Display(Name = "User Name")]
+        public string Username { get; set; }
+
+        [Required(ErrorMessage = "Please enter password")]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
     }
 }
