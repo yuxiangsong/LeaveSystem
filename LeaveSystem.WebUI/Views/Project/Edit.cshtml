@@ -1,0 +1,35 @@
+﻿@model LeaveSystem.Domain.Entities.Projecttask
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutProject.cshtml";
+}
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <h3>Edit @Model.TaskName</h3>
+        </div>
+        @using (Html.BeginForm("Edit", "Project"))
+        {
+            <div class="panel-body">
+                @Html.HiddenFor(t => t.TaskId)
+                @Html.HiddenFor(t => t.ProjectId)
+                <div class="form-group">
+                    <label>
+                        @Html.LabelFor(t => t.TaskName)
+                    </label>
+
+                    @Html.TextBoxFor(t => t.TaskName)
+
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                
+                @Html.ActionLink("Cancel", "Details", new { projectId = ViewBag.projectId ?? @Model.ProjectId}, new { @class = "btn btn-default" })
+            </div>
+        }
+    </div>
+</div>

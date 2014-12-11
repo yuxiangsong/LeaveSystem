@@ -47,6 +47,9 @@ namespace LeaveSystem.WebUI.Infrastructure
              * */
             kernel.Bind<IProductRepository>().To<EFProductRepository>();
             kernel.Bind<IUserRepository>().To<EFUserRepository>();
+
+            kernel.Bind<IProjectRepository>().To<EFProjectRepository>();
+            kernel.Bind<ITaskRepository>().To<EFTaskRepository>();
         }
     }
 }

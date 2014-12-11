@@ -77,14 +77,20 @@
   <ItemGroup>
     <Compile Include="Abstract\IOrderProcessor.cs" />
     <Compile Include="Abstract\IProductRepository.cs" />
+    <Compile Include="Abstract\IProjectRepository.cs" />
+    <Compile Include="Abstract\ITaskRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
+    <Compile Include="Concrete\EFProjectRepository.cs" />
+    <Compile Include="Concrete\EFTaskRepository.cs" />
     <Compile Include="Concrete\EFUserRepository.cs" />
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\ShippingDetails.cs" />
+    <Compile Include="Entities\Projecttask.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Infrastructure\AttributeMustBeTrue.cs" />
     <Compile Include="Infrastructure\AttributeUserAuth.cs" />

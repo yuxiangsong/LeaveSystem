@@ -14,5 +14,8 @@ namespace LeaveSystem.Domain.Concrete
         public DbSet<Product> Products { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Projecttask> Tasks { get; set; }
     }
 }
